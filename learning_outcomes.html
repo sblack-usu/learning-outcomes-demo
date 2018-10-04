@@ -32,12 +32,14 @@
             }
         </style>
         <script type="text/javascript">
-            function updateABETSelection(select, index){
-                var selected = select.options[select.selectedIndex].text;
-                if (selected === "X"){
-                    selected = $("#abet_text_" + index).text();
+            function updateABETSelection(checkbox, index){
+                if (checkbox.checked){
+                    var aText = $("#abet_text_" + index).text();
+                    $("#abet_outcomes").append("<li id='abet_" + index + "'>" + aText + "</li>");
                 }
-                $( "#abet_" + index ).text(selected);
+                else{
+                    $("#abet_" + index).remove();
+                }
             }
 
             knowledgeOptions = ["Remembering", "Understanding", "Applying", "Analyzing", "Evaluating", "Creating"];
@@ -347,64 +349,43 @@
                     <table>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 1);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 1);'>
                             </td>
                             <td id="abet_text_1">An ability to identify, formulate, and solve complex engineering problems by applying principles of engineering, science, and mathematics </td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 2);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 2);'>
                             </td>
                             <td id="abet_text_2">An ability to apply engineering design to produce solutions that meet specified needs with consideration of public helaht, safety, and welfare, as well as global, cultural, social, environmental, and economic factors</td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 3);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 3);'>
                             </td>
                             <td id="abet_text_3">An ability to communicate effectively with a range of audiences</td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 4);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 4);'>
                             </td>
                             <td id="abet_text_4">An ability to recognize ethical and professional responsibilities in engineering situations and make informed judgments, which must consider the impact of engineering solutions in global, economic, environmetal, and societal contexts.</td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 5);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 5);'>
                             </td>
                             <td id="abet_text_5">An ability to function effectively on a team whose members together provide leadership, create a collaborative and inclusive environmetna, establish goals, plan tasks, and meet objectives </td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 6);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 6);'>
                             </td>
                             <td id="abet_text_6">An ability to develop and conduct appropriate experimentation, analyze and interpret data, and use engineering judgement to draw conclusions</td>
                         </tr>
                         <tr>
                             <td>
-                                <select onChange="updateABETSelection(this, 7);">
-                                    <option>NA</option>
-                                    <option>X</option>
-                                </select>
+                                <input type='checkbox' onclick='updateABETSelection(this, 7);'>
                             </td>
                             <td id="abet_text_7">An ability to acquire and apply new knowledge as needed, using appropriate learning strategies.</td>
                         </tr>
@@ -429,15 +410,7 @@
                         </tr>
                     </table>
                     <h3>Your Selected ABET Outcomes are as follows:</h3>
-                    <ul id="abet_outcomes">
-                        <li id="abet_1">NA</li>
-                        <li id="abet_2">NA</li>
-                        <li id="abet_3">NA</li>
-                        <li id="abet_4">NA</li>
-                        <li id="abet_5">NA</li>
-                        <li id="abet_6">NA</li>
-                        <li id="abet_7">NA</li>
-                    </ul>
+                    <ul id="abet_outcomes"></ul>
                 </section>
 
             </form>
