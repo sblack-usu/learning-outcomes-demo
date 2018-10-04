@@ -41,8 +41,8 @@
             }
 
             knowledgeOptions = ["Remembering", "Understanding", "Applying", "Analyzing", "Evaluating", "Creating"];
-            function updateKnowledge(select){
-                var optionKey = select.options[select.selectedIndex].text.toLowerCase();
+            function updateKnowledge(){
+                var optionKey = $("#knowledgeSelection option:selected").text().toLowerCase();
                 var optionId = optionKey + "Text";
                 var optionValue = document.getElementById(optionId).value;
                 $('.actionWordDisplay').each(function() {
@@ -86,7 +86,6 @@
                 jQuery.each(knowledgeOptions, function(i, val){
                     $('#knowledgeSelection').append(new Option(knowledgeOptions[i], knowledgeOptions[i], false, false));
                 });
-                $( "#actionWord").text(rememberingOptions[0]);
 
                 $(document).on('input','#condition',function () {
                     var conditionText = $(this).val();
@@ -121,15 +120,43 @@
             <script>
                 $(function ()
                 {
-                    $("#wizard").steps({
+                    var form = $("#wizard").show();
+                    form.steps({
                         headerTag: "h2",
                         bodyTag: "section",
-                        transitionEffect: "slideLeft"
+                        transitionEffect: "slideLeft",
+                        onStepChanging: function (event, currentIndex, newIndex)
+                        {
+                            // Allways allow previous action even if the current form is not valid!
+                            if (currentIndex > newIndex)
+                            {
+                                return true;
+                            }
+                            if(currentIndex === 2){
+                                if($("#condition").val().trim().length == 0){
+                                    return false;
+                                }
+                            }
+                            if(currentIndex === 3){
+                                if($("#task").val().trim().length == 0){
+                                    return false;
+                                }
+                                if($("#actionWord").html().trim().length == 0){
+                                    return false;
+                                }
+                            }
+                            if(currentIndex === 4){
+                                if($("#degree").val().trim().length == 0){
+                                    return false;
+                                }
+                            }
+                            return true;
+                        }
                     });
                 });
             </script>
 
-            <div id="wizard">
+            <form id="wizard" action="#">
 <!-- Section 1 -->
                 <h2>Introduction to Learning Objectives</h2>
                 <section>
@@ -163,7 +190,7 @@
                     <p>formula: [condition] + [the student will] + [action word] + [task] + [degree]</p>
                     <h3>What's the condition?</h3>
                     <label for="condition" class="redtext"><i>Describe the condition under which the student will perform the described behavior in the gray box:</i></label>
-                    <input class="inputtext" id="condition" name="condition" type="text" class="required">
+                    <input class="inputtext required" id="condition" name="condition" type="text">
                     <h3>Examples:</h3>
                     <ul>
                         <li>Given a map</li>
@@ -177,7 +204,7 @@
                 <section>
                     <table>
                         <tr>
-                            <td><h3>Write a Learning Objective:</h3>formula: [condition] + [the student will] + [action word] + [task] + [degree]</td>
+                            <td><h3>Write a Learning Objective:</h3><small>formula: [condition] + [the student will] + [action word] + [task] + [degree]</small></td>
                             <td></td>
                             <td><b>Choose Level of Knowledge:</b></td>
                             <td><b>Selected Action Word:</b></td>
@@ -187,11 +214,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select id="knowledgeSelection" onChange="updateKnowledge(this);"></select>
+                                <select id="knowledgeSelection" onChange="updateKnowledge();"></select>
                             </td>
-                            <td class="actionWordDisplay"></td>
+                            <td id="actionWord" class="actionWordDisplay"></td>
                             <td>
-                                <input class="inputtext" id="task" name="task" type="text" class="required">
+                                <input class="inputtext required" id="task" name="task" type="text">
                             </td>
                         <tr>
                             <td><b>Review Levels of Knowledge to Obtain:</b></td>
@@ -207,7 +234,7 @@
                         <tr>
                             <td bgcolor="green" class="whitetext">Remembering (level 1)</br>Remembering involves recognizing or recalling relevant facts, terms, concepts, knowledge, or answers.</td>
                             <td>
-                                <input id="rememberingText" type="text" list="remembering" />
+                                <input id="rememberingText" type="text" list="remembering" onchange="updateKnowledge();" />
                                 <datalist id="remembering"></datalist>
                             </td>
                             <td></td>
@@ -215,9 +242,9 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td bgcolor="yellow" class="whitetext">Understanding (level 2)</br>Understanding involved constructing meaning from instructional messages.</td>
+                            <td bgcolor="#9acd32" class="whitetext">Understanding (level 2)</br>Understanding involved constructing meaning from instructional messages.</td>
                             <td>
-                                <input id="understandingText" type="text" list="understanding" />
+                                <input id="understandingText" type="text" list="understanding" onchange="updateKnowledge();" />
                                 <datalist id="understanding"></datalist>
                             </td>
                             <td></td>
@@ -227,7 +254,7 @@
                         <tr>
                             <td bgcolor="orange" class="whitetext">Applying (level 3)</br>Applying involves using ideas and concepts to solve problems.</td>
                             <td>
-                                <input id="applyingText" type="text" list="applying" />
+                                <input id="applyingText" type="text" list="applying" onchange="updateKnowledge();" />
                                 <datalist id="applying"></datalist>
                             </td>
                             <td></td>
@@ -237,7 +264,7 @@
                         <tr>
                             <td bgcolor="blue" class="whitetext">Analyzing (level 4)</br>Involves breaking something down into components, seeing relationships and overall structure.</td>
                             <td>
-                                <input id="analyzingText" type="text" list="analyzing" />
+                                <input id="analyzingText" type="text" list="analyzing" onchange="updateKnowledge();" />
                                 <datalist id="analyzing"></datalist>
                             </td>
                             <td></td>
@@ -247,7 +274,7 @@
                         <tr>
                             <td bgcolor="purple" class="whitetext">Evaluating (level 5)</br>Involves making judgments based on criteria and standards</td>
                             <td>
-                                <input id="evaluatingText" type="text" list="evaluating" />
+                                <input id="evaluatingText" type="text" list="evaluating" onchange="updateKnowledge();" />
                                 <datalist id="evaluating"></datalist>
                             </td>
                             <td></td>
@@ -257,7 +284,7 @@
                         <tr>
                             <td bgcolor="red" class="whitetext">Creating (level 6)</br>Involves reorganizing diverse elements to form a new pattern or structure</td>
                             <td>
-                                <input id="creatingText" type="text" list="creating" />
+                                <input id="creatingText" type="text" list="creating" onchange="updateKnowledge();" />
                                 <datalist id="creating"></datalist>
                             </td>
                             <td></td>
@@ -272,7 +299,7 @@
                     <h3>Write a Learning Objective::</h3>
                     <p>formula: [condition] + [the student will] + [action word] + [task] + [degree]</p>
                     <label for="degree">Describe the desired degree or level of performance. <i class="redtext">Write degree in gray box</i></label>
-                    <input class="inputtext" id="degree" name="condition" type="text" class="required">
+                    <input class="inputtext required" id="degree" name="condition" type="text">
                     <h3>Examples:</h3>
                     <ul>
                         <li>With a definition of each source of ground water recharge and how it functions in the water cycle </li>
@@ -413,7 +440,7 @@
                     </ul>
                 </section>
 
-            </div>
+            </form>
         </div>
     </body>
 </html>
