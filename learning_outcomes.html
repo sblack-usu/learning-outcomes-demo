@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>jQeury.steps Demos</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jquery.steps.css">
+        <script src="lib/modernizr-2.6.2.min.js"></script>
+        <script src="lib/jquery-1.9.1.min.js"></script>
+        <script src="lib/jquery.cookie-1.3.1.js"></script>
+        <script src="lib/jquery.steps.js"></script>
+        <style>
+            .redtext {
+                color: red;
+                font-size: small;
+            }
+            .inputtext {
+                width: 500px;
+            }
+            .purpletext {
+                color: purple;
+            }
+            .whitetext {
+                color: white;
+            }
+        </style>
+        <script type="text/javascript">
+            function updateABETSelection(select, index){
+                var selected = select.options[select.selectedIndex].text;
+                if (selected === "X"){
+                    selected = $("#abet_text_" + index).text();
+                }
+                $( "#abet_" + index ).text(selected);
+            }
+
+            knowledgeOptions = ["Remembering", "Understanding", "Applying", "Analyzing", "Evaluating", "Creating"];
+            function updateKnowledge(select){
+                var optionKey = select.options[select.selectedIndex].text.toLowerCase();
+                var optionId = optionKey + "Text";
+                var optionValue = document.getElementById(optionId).value;
+                $('.actionWordDisplay').each(function() {
+                    $(this).text(optionValue);
+                });
+            }
+
+            $( document ).ready(function() {
+                // Bloom's Taxonomy
+                rememberingOptions = ["define", "describe", "identify", "label", "list", "match", "name", "order", "recall", "select"];
+                jQuery.each(rememberingOptions, function(i, val){
+                    $('#remembering').append(new Option(rememberingOptions[i], rememberingOptions[i], false, false));
+                });
+
+                understandingOptions = ["illustrate", "compare", "distinguish", "estimate", "explain", "classify", "interpret", "predict", "summarize", "translate"];
+                jQuery.each(understandingOptions, function(i, val){
+                    $('#understanding').append(new Option(understandingOptions[i], understandingOptions[i], false, false));
+                });
+
+                applyingOptions = ["organize", "solve", "demonstrate", "discover", "modify", "operate", "predict", "prepare", "produce", "relate", "solve", "choose"];
+                jQuery.each(applyingOptions, function(i, val){
+                    $('#applying').append(new Option(applyingOptions[i], applyingOptions[i], false, false));
+                });
+
+                analyzingOptions = ["analyze", "break down", "compare", "select", "contrast", "deconstruct", "discriminate", "distinguish", "differentiate", "outline", "interelate"];
+                jQuery.each(analyzingOptions, function(i, val){
+                    $('#analyzing').append(new Option(analyzingOptions[i], analyzingOptions[i], false, false));
+                });
+
+                evaluatingOptions = ["Rate", "assess", "monitor", "check", "test", "judge", "Critique", "Recommend", "Interpret", "Weigh"];
+                jQuery.each(evaluatingOptions, function(i, val){
+                    $('#evaluating').append(new Option(evaluatingOptions[i], evaluatingOptions[i], false, false));
+                });
+
+                creatingOptions = ["generate", "plan", "compose", "develop", "create", "invent", "organize", "construct", "produce", "compile", "design", "devise"];
+                jQuery.each(creatingOptions, function(i, val){
+                    $('#creating').append(new Option(creatingOptions[i], creatingOptions[i], false, false));
+                });
+
+                // Setup knowledge dropdown
+                jQuery.each(knowledgeOptions, function(i, val){
+                    $('#knowledgeSelection').append(new Option(knowledgeOptions[i], knowledgeOptions[i], false, false));
+                });
+                $( "#actionWord").text(rememberingOptions[0]);
+
+                $(document).on('input','#condition',function () {
+                    var conditionText = $(this).val();
+                    $('.conditionDisplay').each(function() {
+                        $(this).text(conditionText);
+                    });
+                });
+                $(document).on('input','#task',function () {
+                    var taskText = $(this).val();
+                    $('.taskDisplay').each(function() {
+                        $(this).text(taskText);
+                    });
+                });
+                $(document).on('input','#degree',function () {
+                    var degreeText = $(this).val();
+                    $('.degreeDisplay').each(function() {
+                        $(this).text(degreeText);
+                    });
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="content">
+            <h1>Learning Outcomes Demo</h1>
+
+            <script>
+                $(function ()
+                {
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+                });
+            </script>
+
+            <div id="wizard">
+<!-- Section 1 -->
+                <h2>Introduction to Learning Objectives</h2>
+                <section>
+                    <h3>Learning Objectives - Introduction</h3>
+                    <p>Every educational course begins with goals that can be broken down into concise statements about what students will understand or be able to do when they complete the course. These statements are known as Learning Objectives. Well formulated learning objectives not only help communicate to students what to expect from a lesson, but also aid the teacher in preparing lecture and assignment materials and facilitate construction of in-class and out-of-class activities, and aid in designing course assessments and rubrics.</p>
+                </section>
+<!-- Section 2 -->
+                <h2>How to Write:</h2>
+                <section>
+                    <h3>How to Write a Learning Objective:</h3>
+                    <p>Learning objectives should define observable behavior that can be measured. Although “learning” and “understanding” are worthy instructional goals, they are not observable or measurable. However, a student’s ability to “organize”, “label”, or “explain” is measurable.</p>
+                    <p>Well-written learning objectives typically include three main elements:</p>
+                    <ol>
+                        <li><b>Condition</b> - the condition under which the student will perform the described behavior</li>
+                        <li><b>Behavior</b> - a description of a specific, observable behavior including an action word (action word usually selected from Bloom’s Taxonomy and corresponds with various levels of knowledge)</li>
+                        <li><b>Degree</b> - the degree indicates the desired level or degree of acceptable performance</li>
+                    </ol>
+                    <h3>For example, a well-written learning objective may look like this:</h3>
+                    <p>“Given a diagram of the water cycle, student will identify at least three sources of ground water recharge with a definition of each source and description of how it functions in the larger water cycle”</p>
+                    <p>
+                        Condition: “Given a diagram of the water cycle…”<br \>
+                        Behavior: “…student will identify at least three sources of ground water recharge…”<br \>
+                        <b>Action Word:</b> Identify<br \>
+                        Degree: “…with a definition of each source and description of how it functions in the larger water cycle.”<br \>
+                    </p>
+                </section>
+<!-- Section 3 -->
+                <h2>Write a Learning Objective: Describe Condition Page</h2>
+                <section>
+                    <h3>Write a Learning Objective:</h3>
+                    <p>formula: [condition] + [the student will] + [action word] + [task] + [degree]</p>
+                    <h3>What's the condition?</h3>
+                    <label for="condition" class="redtext"><i>Describe the condition under which the student will perform the described behavior in the gray box:</i></label>
+                    <input class="inputtext" id="condition" name="condition" type="text" class="required">
+                    <h3>Examples:</h3>
+                    <ul>
+                        <li>Given a map</li>
+                        <li>Given a set of data</li>
+                        <li>Using course notes</li>
+                        <li>Using the equation resource worksheet</li>
+                    </ul>
+                </section>
+<!-- Section 4 -->
+                <h2>Write a Learning Objective: Choose Level and Action Word Page</h2>
+                <section>
+                    <table>
+                        <tr>
+                            <td><h3>Write a Learning Objective:</h3>formula: [condition] + [the student will] + [action word] + [task] + [degree]</td>
+                            <td></td>
+                            <td><b>Choose Level of Knowledge:</b></td>
+                            <td><b>Selected Action Word:</b></td>
+                            <td><label for="task"><b>What is the TASK the learner has to do?</b></br><i class="redtext">Describe the task as specific as possible in the gray box</i></label></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <select id="knowledgeSelection" onChange="updateKnowledge(this);"></select>
+                            </td>
+                            <td class="actionWordDisplay"></td>
+                            <td>
+                                <input class="inputtext" id="task" name="task" type="text" class="required">
+                            </td>
+                        <tr>
+                            <td><b>Review Levels of Knowledge to Obtain:</b></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><i>Based on Bloom's Taxonomy</i></td>
+                            <td><i class="redtext">Select corresponding action word for level of knowledge</i></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="green" class="whitetext">Remembering (level 1)</br>Remembering involves recognizing or recalling relevant facts, terms, concepts, knowledge, or answers.</td>
+                            <td>
+                                <input id="rememberingText" type="text" list="remembering" />
+                                <datalist id="remembering"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="yellow" class="whitetext">Understanding (level 2)</br>Understanding involved constructing meaning from instructional messages.</td>
+                            <td>
+                                <input id="understandingText" type="text" list="understanding" />
+                                <datalist id="understanding"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="orange" class="whitetext">Applying (level 3)</br>Applying involves using ideas and concepts to solve problems.</td>
+                            <td>
+                                <input id="applyingText" type="text" list="applying" />
+                                <datalist id="applying"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="blue" class="whitetext">Analyzing (level 4)</br>Involves breaking something down into components, seeing relationships and overall structure.</td>
+                            <td>
+                                <input id="analyzingText" type="text" list="analyzing" />
+                                <datalist id="analyzing"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="purple" class="whitetext">Evaluating (level 5)</br>Involves making judgments based on criteria and standards</td>
+                            <td>
+                                <input id="evaluatingText" type="text" list="evaluating" />
+                                <datalist id="evaluating"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="red" class="whitetext">Creating (level 6)</br>Involves reorganizing diverse elements to form a new pattern or structure</td>
+                            <td>
+                                <input id="creatingText" type="text" list="creating" />
+                                <datalist id="creating"></datalist>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+<!-- Section 5 -->
+                <h2>Write a Learning Objective: Describe Degree of performance</h2>
+                <section>
+                    <h3>Write a Learning Objective::</h3>
+                    <p>formula: [condition] + [the student will] + [action word] + [task] + [degree]</p>
+                    <label for="degree">Describe the desired degree or level of performance. <i class="redtext">Write degree in gray box</i></label>
+                    <input class="inputtext" id="degree" name="condition" type="text" class="required">
+                    <h3>Examples:</h3>
+                    <ul>
+                        <li>With a definition of each source of ground water recharge and how it functions in the water cycle </li>
+                        <li>to 90% accuracy</li>
+                        <li>within 0.1 correct measure</li>
+                        <li>with at least 5 characteristics listed</li>
+                    </ul>
+                    <h3 class="purpletext"><i>Your Learning Objective is currently as follows:</i></h3>
+                    <table>
+                        <tr>
+                            <td><b>Condition:</b></td>
+                            <td><b>Action Word:</b></td>
+                            <td><b>Task:</b></td>
+                            <td><b>Degree:</b></td>
+                        </tr>
+                        <tr>
+                            <td class="conditionDisplay"></td>
+                            <td class="actionWordDisplay"></td>
+                            <td class="taskDisplay"></td>
+                            <td class="degreeDisplay"></td>
+                        </tr>
+                    </table>
+                </section>
+<!-- Section 6 -->
+                <h2>Write a Learning Objective: Define ABET Outcomes</h2>
+                <section>
+                    <h3>Your Learning Objective is currently as follows:</h3>
+                    <table>
+                        <tr>
+                            <td><b>Condition:</b></td>
+                            <td><b>Action Word:</b></td>
+                            <td><b>Task:</b></td>
+                            <td><b>Degree:</b></td>
+                        </tr>
+                        <tr>
+                            <td class="conditionDisplay"></td>
+                            <td class="actionWordDisplay"></td>
+                            <td class="taskDisplay"></td>
+                            <td class="degreeDisplay"></td>
+                        </tr>
+                    </table>
+                    <h3>Link to ABET Outcomes</h3>
+                    <p class="redtext">OPTIONAL: Select ABET Outcomes that correspond with your learning objectives</p>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 1);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_1">An ability to identify, formulate, and solve complex engineering problems by applying principles of engineering, science, and mathematics </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 2);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_2">An ability to apply engineering design to produce solutions that meet specified needs with consideration of public helaht, safety, and welfare, as well as global, cultural, social, environmental, and economic factors</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 3);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_3">An ability to communicate effectively with a range of audiences</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 4);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_4">An ability to recognize ethical and professional responsibilities in engineering situations and make informed judgments, which must consider the impact of engineering solutions in global, economic, environmetal, and societal contexts.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 5);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_5">An ability to function effectively on a team whose members together provide leadership, create a collaborative and inclusive environmetna, establish goals, plan tasks, and meet objectives </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 6);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_6">An ability to develop and conduct appropriate experimentation, analyze and interpret data, and use engineering judgement to draw conclusions</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select onChange="updateABETSelection(this, 7);">
+                                    <option>NA</option>
+                                    <option>X</option>
+                                </select>
+                            </td>
+                            <td id="abet_text_7">An ability to acquire and apply new knowledge as needed, using appropriate learning strategies.</td>
+                        </tr>
+                    </table>
+                </section>
+<!-- Section 7 -->
+                <h2>Review Learning Objective</h2>
+                <section>
+                    <h3>Your Learning Objective is currently as follows:</h3>
+                    <table>
+                        <tr>
+                            <td><b>Condition:</b></td>
+                            <td><b>Action Word:</b></td>
+                            <td><b>Task:</b></td>
+                            <td><b>Degree:</b></td>
+                        </tr>
+                        <tr>
+                            <td class="conditionDisplay"></td>
+                            <td class="actionWordDisplay"></td>
+                            <td class="taskDisplay"></td>
+                            <td class="degreeDisplay"></td>
+                        </tr>
+                    </table>
+                    <h3>Your Selected ABET Outcomes are as follows:</h3>
+                    <ul id="abet_outcomes">
+                        <li id="abet_1">NA</li>
+                        <li id="abet_2">NA</li>
+                        <li id="abet_3">NA</li>
+                        <li id="abet_4">NA</li>
+                        <li id="abet_5">NA</li>
+                        <li id="abet_6">NA</li>
+                        <li id="abet_7">NA</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </body>
+</html>
