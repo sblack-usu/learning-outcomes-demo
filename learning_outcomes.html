@@ -30,8 +30,78 @@
             .whitetext {
                 color: white;
             }
+            /* Popup box BEGIN */
+            .hover_bkgr_fricc{
+                background:rgba(0,0,0,.4);
+                cursor:pointer;
+                display:none;
+                height:100%;
+                position:fixed;
+                text-align:center;
+                top:0;
+                width:100%;
+                z-index:10000;
+            }
+            .hover_bkgr_fricc .helper{
+                display:inline-block;
+                height:100%;
+                vertical-align:middle;
+            }
+            .hover_bkgr_fricc > div {
+                background-color: #fff;
+                box-shadow: 10px 10px 60px #555;
+                display: inline-block;
+                height: auto;
+                min-height: 100px;
+                vertical-align: middle;
+                text-align:left;
+                width: 65%;
+                position: relative;
+                border-radius: 8px;
+                padding: 15px 5%;
+            }
+            .popupCloseButton {
+                background-color: #fff;
+                border: 3px solid #999;
+                border-radius: 50px;
+                cursor: pointer;
+                display: inline-block;
+                font-family: arial;
+                font-weight: bold;
+                position: absolute;
+                top: -20px;
+                right: -20px;
+                font-size: 25px;
+                line-height: 30px;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+            }
+            .popupCloseButton:hover {
+                background-color: #ccc;
+            }
+            .trigger_popup_fricc {
+                cursor: pointer;
+                font-size: 20px;
+                margin: 20px;
+                display: inline-block;
+                font-weight: bold;
+            }
+            /* Popup box END */
         </style>
         <script type="text/javascript">
+            $(window).load(function () {
+                $(".trigger_popup_fricc").click(function(){
+                   $('.hover_bkgr_fricc').show();
+                });
+                $('.hover_bkgr_fricc').click(function(){
+                    $('.hover_bkgr_fricc').hide();
+                });
+                $('.popupCloseButton').click(function(){
+                    $('.hover_bkgr_fricc').hide();
+                });
+            });
+
             function updateABETSelection(checkbox, index){
                 if (checkbox.checked){
                     var aText = $("#abet_text_" + index).text();
@@ -117,8 +187,7 @@
         <![endif]-->
 
         <div class="content">
-            <h1>Learning Outcomes Demo</h1>
-
+            <h1>Learning Outcomes Demo <a class="trigger_popup_fricc">help</a></h1>
             <script>
                 $(function ()
                 {
@@ -134,12 +203,12 @@
                             {
                                 return true;
                             }
-                            if(currentIndex === 2){
+                            if(currentIndex === 0){
                                 if($("#condition").val().trim().length == 0){
                                     return false;
                                 }
                             }
-                            if(currentIndex === 3){
+                            if(currentIndex === 1){
                                 if($("#task").val().trim().length == 0){
                                     return false;
                                 }
@@ -147,7 +216,7 @@
                                     return false;
                                 }
                             }
-                            if(currentIndex === 4){
+                            if(currentIndex === 2){
                                 if($("#degree").val().trim().length == 0){
                                     return false;
                                 }
@@ -160,32 +229,6 @@
 
             <form id="wizard" action="#">
 <!-- Section 1 -->
-                <h2>Introduction to Learning Objectives</h2>
-                <section>
-                    <h3>Learning Objectives - Introduction</h3>
-                    <p>Every educational course begins with goals that can be broken down into concise statements about what students will understand or be able to do when they complete the course. These statements are known as Learning Objectives. Well formulated learning objectives not only help communicate to students what to expect from a lesson, but also aid the teacher in preparing lecture and assignment materials and facilitate construction of in-class and out-of-class activities, and aid in designing course assessments and rubrics.</p>
-                </section>
-<!-- Section 2 -->
-                <h2>How to Write:</h2>
-                <section>
-                    <h3>How to Write a Learning Objective:</h3>
-                    <p>Learning objectives should define observable behavior that can be measured. Although “learning” and “understanding” are worthy instructional goals, they are not observable or measurable. However, a student’s ability to “organize”, “label”, or “explain” is measurable.</p>
-                    <p>Well-written learning objectives typically include three main elements:</p>
-                    <ol>
-                        <li><b>Condition</b> - the condition under which the student will perform the described behavior</li>
-                        <li><b>Behavior</b> - a description of a specific, observable behavior including an action word (action word usually selected from Bloom’s Taxonomy and corresponds with various levels of knowledge)</li>
-                        <li><b>Degree</b> - the degree indicates the desired level or degree of acceptable performance</li>
-                    </ol>
-                    <h3>For example, a well-written learning objective may look like this:</h3>
-                    <p>“Given a diagram of the water cycle, student will identify at least three sources of ground water recharge with a definition of each source and description of how it functions in the larger water cycle”</p>
-                    <p>
-                        Condition: “Given a diagram of the water cycle…”<br \>
-                        Behavior: “…student will identify at least three sources of ground water recharge…”<br \>
-                        <b>Action Word:</b> Identify<br \>
-                        Degree: “…with a definition of each source and description of how it functions in the larger water cycle.”<br \>
-                    </p>
-                </section>
-<!-- Section 3 -->
                 <h2>Write a Learning Objective: Describe Condition Page</h2>
                 <section>
                     <h3>Write a Learning Objective:</h3>
@@ -201,7 +244,7 @@
                         <li>Using the equation resource worksheet</li>
                     </ul>
                 </section>
-<!-- Section 4 -->
+<!-- Section 2 -->
                 <h2>Write a Learning Objective: Choose Level and Action Word Page</h2>
                 <section>
                     <table>
@@ -295,7 +338,7 @@
                         </tr>
                     </table>
                 </section>
-<!-- Section 5 -->
+<!-- Section 3 -->
                 <h2>Write a Learning Objective: Describe Degree of performance</h2>
                 <section>
                     <h3>Write a Learning Objective::</h3>
@@ -325,7 +368,7 @@
                         </tr>
                     </table>
                 </section>
-<!-- Section 6 -->
+<!-- Section 4 -->
                 <h2>Write a Learning Objective: Define ABET Outcomes</h2>
                 <section>
                     <h3>Your Learning Objective is currently as follows:</h3>
@@ -391,7 +434,7 @@
                         </tr>
                     </table>
                 </section>
-<!-- Section 7 -->
+<!-- Section 5 -->
                 <h2>Review Learning Objective</h2>
                 <section>
                     <h3>Your Learning Objective is currently as follows:</h3>
@@ -414,6 +457,31 @@
                 </section>
 
             </form>
+        </div>
+
+        <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">X</div>
+                <h3>Learning Objectives - Introduction</h3>
+                <p>Every educational course begins with goals that can be broken down into concise statements about what students will understand or be able to do when they complete the course. These statements are known as Learning Objectives. Well formulated learning objectives not only help communicate to students what to expect from a lesson, but also aid the teacher in preparing lecture and assignment materials and facilitate construction of in-class and out-of-class activities, and aid in designing course assessments and rubrics.</p>
+                <h3>How to Write a Learning Objective:</h3>
+                <p>Learning objectives should define observable behavior that can be measured. Although “learning” and “understanding” are worthy instructional goals, they are not observable or measurable. However, a student’s ability to “organize”, “label”, or “explain” is measurable.</p>
+                <p>Well-written learning objectives typically include three main elements:</p>
+                <ol>
+                    <li><b>Condition</b> - the condition under which the student will perform the described behavior</li>
+                    <li><b>Behavior</b> - a description of a specific, observable behavior including an action word (action word usually selected from Bloom’s Taxonomy and corresponds with various levels of knowledge)</li>
+                    <li><b>Degree</b> - the degree indicates the desired level or degree of acceptable performance</li>
+                </ol>
+                <h3>For example, a well-written learning objective may look like this:</h3>
+                <p>“Given a diagram of the water cycle, student will identify at least three sources of ground water recharge with a definition of each source and description of how it functions in the larger water cycle”</p>
+                <p>
+                    Condition: “Given a diagram of the water cycle…”<br \>
+                    Behavior: “…student will identify at least three sources of ground water recharge…”<br \>
+                    <b>Action Word:</b> Identify<br \>
+                    Degree: “…with a definition of each source and description of how it functions in the larger water cycle.”<br \>
+                </p>
+            </div>
         </div>
     </body>
 </html>
