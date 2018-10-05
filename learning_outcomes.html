@@ -113,51 +113,54 @@
             }
 
             knowledgeOptions = ["Remembering", "Understanding", "Applying", "Analyzing", "Evaluating", "Creating"];
-            function updateKnowledge(){
-                var optionKey = $("#knowledgeSelection option:selected").text().toLowerCase();
-                var optionId = optionKey + "Text";
-                var optionValue = document.getElementById(optionId).value;
+            rememberingOptions = ["define", "describe", "identify", "label", "list", "match", "name", "order", "recall", "select"];
+            understandingOptions = ["illustrate", "compare", "distinguish", "estimate", "explain", "classify", "interpret", "predict", "summarize", "translate"];
+            applyingOptions = ["organize", "solve", "demonstrate", "discover", "modify", "operate", "predict", "prepare", "produce", "relate", "solve", "choose"];
+            analyzingOptions = ["analyze", "break down", "compare", "select", "contrast", "deconstruct", "discriminate", "distinguish", "differentiate", "outline", "interelate"];
+            evaluatingOptions = ["Rate", "assess", "monitor", "check", "test", "judge", "Critique", "Recommend", "Interpret", "Weigh"];
+            creatingOptions = ["generate", "plan", "compose", "develop", "create", "invent", "organize", "construct", "produce", "compile", "design", "devise"];
+
+            function updateActionList(knowledge){
+                if(!(typeof knowledge === 'string')) {
+                    knowledge = knowledge.value;
+                }
+                options = ["not found"];
+                if(knowledge === "Remembering"){
+                    options = rememberingOptions;
+                }
+                if(knowledge === "Understanding"){
+                    options = understandingOptions;
+                }
+                if(knowledge === "Applying"){
+                    options = applyingOptions;
+                }
+                if(knowledge === "Analyzing"){
+                    options = analyzingOptions;
+                }
+                if(knowledge === "Evaluating"){
+                    options = evaluatingOptions;
+                }
+                if(knowledge === "Creating"){
+                    options = creatingOptions;
+                }
+                $('#actionList').empty();
+                jQuery.each(options, function(i, val){
+                    $('#actionList').append(new Option(options[i], options[i], false, false));
+                });
+            }
+
+            function selectAction(actionValue){
                 $('.actionWordDisplay').each(function() {
-                    $(this).text(optionValue);
+                    $(this).text(actionValue.value);
                 });
             }
 
             $( document ).ready(function() {
-                // Bloom's Taxonomy
-                rememberingOptions = ["define", "describe", "identify", "label", "list", "match", "name", "order", "recall", "select"];
-                jQuery.each(rememberingOptions, function(i, val){
-                    $('#remembering').append(new Option(rememberingOptions[i], rememberingOptions[i], false, false));
-                });
-
-                understandingOptions = ["illustrate", "compare", "distinguish", "estimate", "explain", "classify", "interpret", "predict", "summarize", "translate"];
-                jQuery.each(understandingOptions, function(i, val){
-                    $('#understanding').append(new Option(understandingOptions[i], understandingOptions[i], false, false));
-                });
-
-                applyingOptions = ["organize", "solve", "demonstrate", "discover", "modify", "operate", "predict", "prepare", "produce", "relate", "solve", "choose"];
-                jQuery.each(applyingOptions, function(i, val){
-                    $('#applying').append(new Option(applyingOptions[i], applyingOptions[i], false, false));
-                });
-
-                analyzingOptions = ["analyze", "break down", "compare", "select", "contrast", "deconstruct", "discriminate", "distinguish", "differentiate", "outline", "interelate"];
-                jQuery.each(analyzingOptions, function(i, val){
-                    $('#analyzing').append(new Option(analyzingOptions[i], analyzingOptions[i], false, false));
-                });
-
-                evaluatingOptions = ["Rate", "assess", "monitor", "check", "test", "judge", "Critique", "Recommend", "Interpret", "Weigh"];
-                jQuery.each(evaluatingOptions, function(i, val){
-                    $('#evaluating').append(new Option(evaluatingOptions[i], evaluatingOptions[i], false, false));
-                });
-
-                creatingOptions = ["generate", "plan", "compose", "develop", "create", "invent", "organize", "construct", "produce", "compile", "design", "devise"];
-                jQuery.each(creatingOptions, function(i, val){
-                    $('#creating').append(new Option(creatingOptions[i], creatingOptions[i], false, false));
-                });
-
                 // Setup knowledge dropdown
                 jQuery.each(knowledgeOptions, function(i, val){
                     $('#knowledgeSelection').append(new Option(knowledgeOptions[i], knowledgeOptions[i], false, false));
                 });
+                updateActionList("Remembering");
 
                 $(document).on('input','#condition',function () {
                     var conditionText = $(this).val();
@@ -208,7 +211,7 @@
                                 }
                             }
                             if(currentIndex === 1){
-                                if($("#actionWord").html().trim().length == 0){
+                                if($("#actionText").val().trim().length == 0){
                                     return false;
                                 }
                             }
@@ -248,83 +251,34 @@
                 <h2>Action</h2>
                 <section>
                     <p class="conditionDisplay"></p>
+                    <a>Choose Level of Knowledge:</a>
+                    <select id="knowledgeSelection" onChange="updateActionList(this);"></select>
+                    </br>
+                    <a>Choose an Action:</a>
+                    <input id="actionText" list="actionList" onchange="selectAction(this);" type="text">
+                    <datalist id="actionList"></datalist>
+                    </br>
                     <table>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td><b>Choose Level of Knowledge:</b></td>
-                            <td><b>Selected Action:</b></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <select id="knowledgeSelection" onChange="updateKnowledge();"></select>
-                            </td>
-                            <td id="actionWord" class="actionWordDisplay"></td>
-                        <tr>
-                            <td><b>Review Levels of Knowledge to Obtain:</b></td>
-                            <td></td>
-                        </tr>
-                        <tr>
                             <td><i>Based on Bloom's Taxonomy</i></td>
-                            <td><i class="redtext">Select corresponding action for level of knowledge</i></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="green" class="whitetext">Remembering (level 1)</br>Remembering involves recognizing or recalling relevant facts, terms, concepts, knowledge, or answers.</td>
-                            <td>
-                                <input id="rememberingText" type="text" list="remembering" onchange="updateKnowledge();" />
-                                <datalist id="remembering"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="#9acd32" class="whitetext">Understanding (level 2)</br>Understanding involved constructing meaning from instructional messages.</td>
-                            <td>
-                                <input id="understandingText" type="text" list="understanding" onchange="updateKnowledge();" />
-                                <datalist id="understanding"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="orange" class="whitetext">Applying (level 3)</br>Applying involves using ideas and concepts to solve problems.</td>
-                            <td>
-                                <input id="applyingText" type="text" list="applying" onchange="updateKnowledge();" />
-                                <datalist id="applying"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="blue" class="whitetext">Analyzing (level 4)</br>Involves breaking something down into components, seeing relationships and overall structure.</td>
-                            <td>
-                                <input id="analyzingText" type="text" list="analyzing" onchange="updateKnowledge();" />
-                                <datalist id="analyzing"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="purple" class="whitetext">Evaluating (level 5)</br>Involves making judgments based on criteria and standards</td>
-                            <td>
-                                <input id="evaluatingText" type="text" list="evaluating" onchange="updateKnowledge();" />
-                                <datalist id="evaluating"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td bgcolor="red" class="whitetext">Creating (level 6)</br>Involves reorganizing diverse elements to form a new pattern or structure</td>
-                            <td>
-                                <input id="creatingText" type="text" list="creating" onchange="updateKnowledge();" />
-                                <datalist id="creating"></datalist>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </table>
                 </section>
