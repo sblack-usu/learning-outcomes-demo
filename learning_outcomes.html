@@ -236,6 +236,12 @@
                 <h2>Describe</h2>
                 <a class="trigger_popup_fricc">help</a>
                 <section>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span>...<br/><br/>
+
                     <h3>What's the condition?</h3>
                     <label for="condition" class="redtext"><i>Describe the condition under which the student will perform the described behavior in the gray box:</i></label>
                     <input class="inputtext required" id="condition" name="condition" type="text">
@@ -250,7 +256,12 @@
 <!-- Section 2 -->
                 <h2>Action</h2>
                 <section>
-                    <p class="conditionDisplay"></p>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span>...<br/><br/>
+
                     <a>Choose Level of Knowledge:</a>
                     <select id="knowledgeSelection" onChange="updateActionList(this);"></select>
                     </br>
@@ -285,7 +296,12 @@
 <!-- Section 3 -->
                 <h2>Task</h2>
                 <section>
-                    <p><a class="conditionDisplay"></a> <a class="actionWordDisplay"></a></p>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span>...<br/><br/>
+
                     <label for="task"><b>What is the TASK the learner has to do?</b></br><i class="redtext">Describe the task as specific as possible in the gray box</i></label>
                     <input class="inputtext required" id="task" name="task" type="text">
                     <h3>Examples:</h3>
@@ -299,6 +315,12 @@
 <!-- Section 4 -->
                 <h2>Degree</h2>
                 <section>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span>...<br/><br/>
+
                     <label for="degree">Describe the desired degree or level of performance. <i class="redtext">Write degree in gray box</i></label>
                     <input class="inputtext required" id="degree" name="condition" type="text">
                     <h3>Examples:</h3>
@@ -308,39 +330,17 @@
                         <li>within 0.1 correct measure</li>
                         <li>with at least 5 characteristics listed</li>
                     </ul>
-                    <h3 class="purpletext"><i>Your Learning Objective is currently as follows:</i></h3>
-                    <table>
-                        <tr>
-                            <td><b>Condition:</b></td>
-                            <td><b>Action:</b></td>
-                            <td><b>Task:</b></td>
-                            <td><b>Degree:</b></td>
-                        </tr>
-                        <tr>
-                            <td class="conditionDisplay"></td>
-                            <td class="actionWordDisplay"></td>
-                            <td class="taskDisplay"></td>
-                            <td class="degreeDisplay"></td>
-                        </tr>
-                    </table>
+                    
                 </section>
 <!-- Section 5 -->
                 <h2>ABET</h2>
                 <section>
-                    <table>
-                        <tr>
-                            <td><b>Condition:</b></td>
-                            <td><b>Action:</b></td>
-                            <td><b>Task:</b></td>
-                            <td><b>Degree:</b></td>
-                        </tr>
-                        <tr>
-                            <td class="conditionDisplay"></td>
-                            <td class="actionWordDisplay"></td>
-                            <td class="taskDisplay"></td>
-                            <td class="degreeDisplay"></td>
-                        </tr>
-                    </table>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span><br/><br/>
+
                     <h3>Link to ABET Outcomes</h3>
                     <p class="redtext">OPTIONAL: Select ABET Outcomes that correspond with your learning objectives</p>
 
@@ -392,7 +392,12 @@
 <!-- Section 6 -->
                 <h2>Review</h2>
                 <section>
-                    <h3>Your Learning Objective is currently as follows:</h3>
+                    <h3>Learning Objective:</h3>
+                    <span class="conditionDisplay"></span>
+                    <span class="actionWordDisplay"></span>
+                    <span class="taskDisplay"></span>
+                    <span class="degreeDisplay"></span><br/><br/>
+                    <!--
                     <table>
                         <tr>
                             <td><b>Condition:</b></td>
@@ -407,7 +412,8 @@
                             <td class="degreeDisplay"></td>
                         </tr>
                     </table>
-                    <h3>Your Selected ABET Outcomes are as follows:</h3>
+                -->
+                    <h3>ABET Outcomes:</h3>
                     <ul id="abet_outcomes"></ul>
                 </section>
 
